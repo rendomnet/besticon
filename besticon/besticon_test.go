@@ -12,7 +12,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/rendomnet/besticon/vcr"
+	"github.com/mat/besticon/vcr"
 )
 
 func TestKicktipp(t *testing.T) {
@@ -176,7 +176,7 @@ func TestYoutubeWithDomainRewrite(t *testing.T) {
 }
 
 func TestRandomOrg(t *testing.T) {
-	// https://github.com/rendomnet/besticon/issues/28
+	// https://github.com/mat/besticon/issues/28
 	_, finder, err := fetchIconsWithVCR("random.org.vcr", "https://random.org")
 	assertEquals(t, nil, err)
 

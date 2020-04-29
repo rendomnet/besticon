@@ -25,9 +25,9 @@ import (
 	_ "image/gif"
 	_ "image/png"
 
-	_ "github.com/rendomnet/besticon/ico"
+	_ "github.com/mat/besticon/ico"
 
-	"github.com/rendomnet/besticon/colorfinder"
+	"github.com/mat/besticon/colorfinder"
 
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/net/html/charset"
@@ -38,7 +38,7 @@ import (
 var defaultFormats []string
 
 const MinIconSize = 0
-const MaxIconSize = 1100
+const MaxIconSize = 500
 
 // Icon holds icon information.
 type Icon struct {

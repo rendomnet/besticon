@@ -17,7 +17,7 @@ import (
 	"image/color"
 
 	// Load supported image formats
-	_ "github.com/rendomnet/besticon/ico"
+	_ "github.com/mat/besticon/ico"
 	_ "image/gif"
 	_ "image/png"
 )

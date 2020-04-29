@@ -7,7 +7,7 @@
 FROM golang:1.13 as builder
 
 # Copy local code to the container image.
-WORKDIR /go/src/github.com/rendomnet/besticon
+WORKDIR /go/src/github.com/mat/besticon
 COPY . .
 
 # Build the command inside the container.
@@ -21,7 +21,7 @@ FROM alpine:3.10
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /go/src/github.com/rendomnet/besticon/bin/linux_amd64/iconserver /iconserver
+COPY --from=builder /go/src/github.com/mat/besticon/bin/linux_amd64/iconserver /iconserver
 
 ENV HOST_ONLY_DOMAINS=*
 ENV POPULAR_SITES=bing.com,github.com,instagram.com,reddit.com
