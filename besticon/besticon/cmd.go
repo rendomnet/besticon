@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/mat/besticon/besticon"
+	"github.com/rendomnet/besticon/besticon"
 )
 
 func main() {

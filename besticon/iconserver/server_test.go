@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mat/besticon/besticon"
+	"github.com/rendomnet/besticon/besticon"
 )
 
 func TestGetIndex(t *testing.T) {
