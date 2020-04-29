@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
+	"image/color"
 	"net/http"
 	"net/url"
 	"os"
@@ -151,8 +152,10 @@ func alliconsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	iconColor := finder.MainColorForIcons()
+
 	addCacheControl(w, cacheDurationSeconds)
-	writeAPIIcons(w, url, icons)
+	writeAPIIcons(w, url, icons, iconColor)
 }
 
 func lettericonHandler(w http.ResponseWriter, r *http.Request) {
@@ -176,7 +179,7 @@ func writeAPIError(w http.ResponseWriter, httpStatus int, e error) {
 	renderJSONResponse(w, httpStatus, data)
 }
 
-func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon) {
+func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, iconColor *color.RGBA) {
 	// Don't return whole image data
 	newIcons := []besticon.Icon{}
 	for _, ico := range icons {
@@ -186,11 +189,13 @@ func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon) {
 	}
 
 	data := &struct {
-		URL   string          `json:"url"`
-		Icons []besticon.Icon `json:"icons"`
+		URL    string          `json:"url"`
+		Icons  []besticon.Icon `json:"icons"`
+		Colors *color.RGBA     `json:"colors"`
 	}{
 		url,
 		newIcons,
+		iconColor,
 	}
 	renderJSONResponse(w, 200, data)
 }
