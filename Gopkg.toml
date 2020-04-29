@@ -30,6 +30,6 @@
   unused-packages = true
 
 [metadata.heroku]
-  root-package = "github.com/mat/besticon"
+  root-package = "github.com/rendomnet/besticon"
   go-version = "go1.14"
   install = [ "./..." ]
