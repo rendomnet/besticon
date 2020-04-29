@@ -38,7 +38,7 @@ import (
 var defaultFormats []string
 
 const MinIconSize = 0
-const MaxIconSize = 1100
+const MaxIconSize = 500
 
 // Icon holds icon information.
 type Icon struct {

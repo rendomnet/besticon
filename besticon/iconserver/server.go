@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
-	"image/color"
 	"net/http"
 	"net/url"
 	"os"
@@ -20,6 +19,8 @@ import (
 	"github.com/rendomnet/besticon/lettericon"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+
+	"github.com/rs/cors"
 
 	// Enable runtime profiling at /debug/pprof
 	_ "net/http/pprof"
@@ -150,10 +151,8 @@ func alliconsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	iconColor := finder.MainColorForIcons()
-
 	addCacheControl(w, cacheDurationSeconds)
-	writeAPIIcons(w, url, icons, iconColor)
+	writeAPIIcons(w, url, icons)
 }
 
 func lettericonHandler(w http.ResponseWriter, r *http.Request) {
@@ -177,7 +176,7 @@ func writeAPIError(w http.ResponseWriter, httpStatus int, e error) {
 	renderJSONResponse(w, httpStatus, data)
 }
 
-func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, iconColor *color.RGBA) {
+func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon) {
 	// Don't return whole image data
 	newIcons := []besticon.Icon{}
 	for _, ico := range icons {
@@ -187,15 +186,12 @@ func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, ico
 	}
 
 	data := &struct {
-		Icons  []besticon.Icon `json:"icons"`
-		URL    string          `json:"url"`
-		Colors *color.RGBA     `json:"colors"`
+		URL   string          `json:"url"`
+		Icons []besticon.Icon `json:"icons"`
 	}{
-		newIcons,
 		url,
-		iconColor,
+		newIcons,
 	}
-
 	renderJSONResponse(w, 200, data)
 }
 
@@ -267,7 +263,7 @@ func startServer(port string, address string) {
 
 	addr := address + ":" + port
 	logger.Print("Starting server on ", addr, "...")
-	e := http.ListenAndServe(addr, newLoggingMux())
+	e := http.ListenAndServe(addr, cors.Default().Handler(newLoggingMux()))
 	if e != nil {
 		logger.Fatalf("cannot start server: %s\n", e)
 	}
