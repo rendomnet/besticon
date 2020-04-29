@@ -149,7 +149,7 @@ func alliconsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	iconColor := finder.MainColorForIcons(icons)
+	iconColor := finder.MainColorForIcons()
 
 	addCacheControl(w, cacheDurationSeconds)
 	writeAPIIcons(w, url, icons, iconColor)
