@@ -21,8 +21,8 @@ import (
 	"golang.org/x/net/publicsuffix"
 
 	"github.com/golang/freetype/truetype"
-	"github.com/rendomnet/besticon/colorfinder"
-	"github.com/rendomnet/besticon/lettericon/fonts"
+	"github.com/mat/besticon/colorfinder"
+	"github.com/mat/besticon/lettericon/fonts"
 )
 
 const dpi = 72
