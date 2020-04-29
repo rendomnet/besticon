@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
+	"image/color"
 	"net/http"
 	"net/url"
 	"os"
@@ -176,7 +177,7 @@ func writeAPIError(w http.ResponseWriter, httpStatus int, e error) {
 	renderJSONResponse(w, httpStatus, data)
 }
 
-func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, color string) {
+func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, iconColor *color.RGBA) {
 	// Don't return whole image data
 	newIcons := []besticon.Icon{}
 	for _, ico := range icons {
