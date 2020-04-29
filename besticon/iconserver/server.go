@@ -188,11 +188,9 @@ func writeAPIIcons(w http.ResponseWriter, url string, icons []besticon.Icon, col
 	data := &struct {
 		URL   string          `json:"url"`
 		Icons []besticon.Icon `json:"icons"`
-		URL   string          `json:"url"`
 	}{
 		url,
 		newIcons,
-		url
 	}
 	renderJSONResponse(w, 200, data)
 }
